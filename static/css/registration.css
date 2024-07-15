@@ -1,0 +1,64 @@
+.nav-links{
+    margin: 5px;
+  }
+  
+
+.nav-link {
+    font-weight: bold;
+  }
+
+.form-container {
+    max-width: 600px;
+    margin: auto;
+    padding-bottom: 50px;
+}
+.form-check-inline {
+    display: inline-block;
+    margin-right: 10px;
+}
+.form-control, .btn-block {
+    max-width: 500px;
+    margin: 0;
+}
+form{
+    margin-left: 10%;
+}
+
+
+.enquiry-submit{
+    width: 50%;
+    margin-left: 23%;
+  }
+  
+
+.enq-form{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: transparent;
+    border-bottom:solid 1px black;
+  }
+
+.home-btn{
+    border: 0px;
+    padding: 5px;
+    background-color: transparent;
+}
+
+.register-submit{
+        width: 50%;
+        margin-left: 23%;
+}
+
+.partners{
+    margin-top: 5%;
+}
+.sponsors{
+    margin-top: 3%;
+}
+
+.logos img{
+    max-width: 100px;
+    background-color: transparent;
+    margin: 5px;
+  }

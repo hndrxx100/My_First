@@ -1,0 +1,44 @@
+.nav-links{
+    margin: 5px;
+  }
+  
+.nav-link {
+    font-weight: bold;
+  }
+
+.form-control{
+    width: 100%;
+    margin-left: 0px;
+}
+
+.form-submit{
+    width: 50%;
+    margin-left: 0px;
+    margin-left: 25%;
+}
+
+form{
+    padding: 10%;
+    margin: 5%;
+}
+
+.enq-form{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: transparent;
+    border-bottom: solid 1px black;
+  }
+
+.partners{
+    margin-top: 5%;
+}
+.sponsors{
+    margin-top: 3%;
+}
+
+.logos img{
+    max-width: 50px;
+    background-color: transparent;
+    margin: 5%;
+  }

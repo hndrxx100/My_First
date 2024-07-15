@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Conference 2024 - Event Registration</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='pictures/top_banner.jpg') }}">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-dark">
+        <div class="container">
+            <a class="navbar-brand home-btn text-light" href="{{ url_for('landing') }}">Speech Conference 2024</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item nav-links">
+                        <a class="nav-link btn btn-primary text-light" href="{{ url_for('landing') }}">Home</a>
+                    </li>
+                    <li class="nav-item nav-links">
+                        <a class="nav-link btn btn-primary text-light" href="{{ url_for('about_us') }}">About Us</a>
+                    </li>
+                    <li class="nav-item nav-links">
+                        <a class="nav-link btn btn-primary text-light" href="{{ url_for('admin_login') }}">Log In</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+            <img src="https://cdn1.iconfinder.com/data/icons/welcome-greeting-illustration/3000/Welcome-12-512.png" class="img-fluid" alt="Conference">
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-center mb-4"></h2>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <form action="{{ url_for('registration') }}" method="post" id="registrationForm">
+                    <div class="form-group bg-light">
+                        <label for="firstname"></label>
+                        <input type="text" class="form-control enq-form" id="firstname" name="firstname" placeholder="Enter your first name" required>
+                    </div>
+                    <div class="form-group bg-light">
+                        <label for="lastname"></label>
+                        <input type="text" class="form-control enq-form" id="lastname" name="lastname" placeholder="Enter your last name" required>
+                    </div>
+                    <div class="form-group bg-light">
+                        <label for="email"></label>
+                        <input type="email" class="form-control enq-form" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group bg-light">
+                        <label for="phone"></label>
+                        <input type="tel" class="form-control enq-form" id="phone" name="phone" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Registration Type:</label>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="attendee" name="registration_type" class="custom-control-input" value="Attendee" required>
+                            <label class="custom-control-label" for="attendee">Attendee</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="speaker" name="registration_type" class="custom-control-input" value="Speaker">
+                            <label class="custom-control-label" for="speaker">Speaker</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="sponsor" name="registration_type" class="custom-control-input" value="Sponsor">
+                            <label class="custom-control-label" for="sponsor">Sponsor</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Snack Preferences:</label>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="malt" name="snack_preferences" value="Malt">
+                            <label class="custom-control-label" for="malt">Malt</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="water" name="snack_preferences" value="Water">
+                            <label class="custom-control-label" for="water">Water</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="kingcracker" name="snack_preferences" value="King Cracker">
+                            <label class="custom-control-label" for="kingcracker">King Cracker</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Extra Services:</label>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="extra_services" name="extra_services" value="Extra Services">
+                            <label class="custom-control-label" for="extra_services">Extra Services (additional cost)</label>
+                        </div>
+                    </div>
+                    <button type="submit" id="signupButton" class="btn btn-primary btn-block register-submit">Register</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    
+
+    <section id="partners" class="py-5 bg-light partners">
+        <div class="container">
+          <h2 class="text-center">Sponsors & Partners</h2>
+          <div class="row sponsors">
+            <div class="col-md-3 logos">
+              <img src="https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/78-microsoft-64.png" class="img-fluid mx-auto d-block" alt="Microsoft">
+            </div>
+            <div class="col-md-3 logos">
+              <img src="https://cdn3.iconfinder.com/data/icons/picons-social/57/16-apple-64.png" class="img-fluid mx-auto d-block" alt="Apple">
+            </div>
+            <div class="col-md-3 logos">
+              <img src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/amazon-64.png" class="img-fluid mx-auto d-block" alt="Amazon">
+            </div>
+            <div class="col-md-3 logos">
+              <img src="https://cdn1.iconfinder.com/data/icons/bootstrap-fill-vol-2/16/meta-64.png" class="img-fluid mx-auto d-block" alt="Meta">
+            </div>
+            <div class="col-md-3 logos">
+              <img src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/tesla-64.png" class="img-fluid mx-auto d-block" alt="Meta">
+            </div>
+            <div class="col-md-3 logos">
+              <img src="https://cdn0.iconfinder.com/data/icons/car-brands/550/Mercedes_logo-64.png" class="img-fluid mx-auto d-block" alt="Meta">
+            </div>
+            <div class="col-md-3 logos">
+              <img src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/ibm-64.png" class="img-fluid mx-auto d-block" alt="Meta">
+            </div>
+            <div class="col-md-3 logos">
+              <img src="https://cdn1.iconfinder.com/data/icons/logos-brands-in-colors/272/Google_2015_logo-64.png" class="img-fluid mx-auto d-block" alt="Meta">
+            </div>
+          </div>
+        </div>
+    </section>
+
+<!-- Modal HTML structure -->
+<div class="modal fade" id="responseModal" tabindex="-1" role="dialog" aria-labelledby="responseModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="responseModalLabel">Response</h5>
+          <button type="button" class="close" id="closeModalButton" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="modalMessage"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-4 bg-dark text-white text-center">
+    <div class="container">
+      <p>&copy; 2024 Speech Conference. All rights reserved.</p>
+    </div>
+  </footer>
+  
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/registration_flash.js') }}"></script>
+</body>
+</html>
