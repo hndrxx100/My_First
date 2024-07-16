@@ -101,18 +101,25 @@ class Registrant:
             try:
                 cursor = conn.cursor()
 
-                cursor.execute(
-                    """
-                    INSERT INTO participants (firstName, lastName, email, phonenumber, registration_type, snackpreferences, ExtraServices)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)
-                    """, (self.firstname, self.lastname, self.email, self.phone, self.registration_type, self.snacks,
-                          self.extra_services)
+                query = sql.SQL("""
+                    INSERT INTO Participants (firstname, lastname, email, phonenumber, registration_type, snackpreferences, extraservices)
+                    VALUES ({firstname}, {lastname}, {email}, {phonenumber}, {registration_type}, {snackpreferences}, {extraservices})
+                """).format(
+                    firstname=sql.Literal(self.firstname),
+                    lastname=sql.Literal(self.lastname),
+                    email=sql.Literal(self.email),
+                    phonenumber=sql.Literal(self.phone),
+                    registration_type=sql.Literal(self.registration_type),
+                    snackpreferences=sql.Literal(self.snacks),
+                    extraservices=sql.Literal(self.extra_services)
                 )
+
+                cursor.execute(query)
                 conn.commit()
                 print("Participant inserted successfully")
 
             except psycopg2.Error as err:
-                print(f"Error inserting user: {err}")
+                print(f"Error inserting user: {err.pgcode}, {err.pgerror}")
 
             finally:
                 if cursor:
