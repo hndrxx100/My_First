@@ -31,21 +31,21 @@ $(document).ready(function() {
             var id = index + 1;  // Increment id based on the index of the registration
             var row = '<tr>' +
                 '<td>' + id + '</td>' +
-                '<td>' + registration.Firstname + '</td>' +
-                '<td>' + registration.Lastname + '</td>' +
-                '<td>' + registration.Email + '</td>' +
-                '<td>' + registration.Phonenumber + '</td>' +
-                '<td>' + registration.Registration_type + '</td>' +
+                '<td>' + registration.firstname + '</td>' +
+                '<td>' + registration.fastname + '</td>' +
+                '<td>' + registration.email + '</td>' +
+                '<td>' + registration.phonenumber + '</td>' +
+                '<td>' + registration.registration_type + '</td>' +
                 '<td>';
-            if (registration.Snackpreferences) {
-                $.each(registration.Snackpreferences.split(', '), function(idx, preference) {
+            if (registration.snackpreferences) {
+                $.each(registration.snackpreferences.split(', '), function(idx, preference) {
                     row += preference + '<br>';
                 });
             } else {
                 row += 'None';
             }
             row += '</td>' +
-                '<td>' + (registration.Extraservices ? 'Yes' : 'No') + '</td>' +
+                '<td>' + (registration.extraservices ? 'Yes' : 'No') + '</td>' +
                 '</tr>';
             tableBody.append(row);
         });
