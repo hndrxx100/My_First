@@ -32,7 +32,7 @@ $(document).ready(function() {
             var row = '<tr>' +
                 '<td>' + id + '</td>' +
                 '<td>' + registration.firstname + '</td>' +
-                '<td>' + registration.fastname + '</td>' +
+                '<td>' + registration.lastname + '</td>' +
                 '<td>' + registration.email + '</td>' +
                 '<td>' + registration.phonenumber + '</td>' +
                 '<td>' + registration.registration_type + '</td>' +
