@@ -15,8 +15,8 @@ class Registrant:
     def connection_to_db(self):
         try:
             conn = mysql.connector.connect(
-                user='root',  # Replace with your MySQL username
-                password='',  # Replace with your MySQL password
+                user='hndrxx',  # Replace with your MySQL username
+                password='Hndrxx_1000',  # Replace with your MySQL password
                 host='localhost',  # Replace with your MySQL host
                 database='registrations'  # Replace with your MySQL database name
             )

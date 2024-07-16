@@ -11,8 +11,8 @@ class AdminLogin:
     def connection_to_db():
         try:
             conn = mysql.connector.connect(
-                user='root',
-                password='',
+                user='hndrxx',
+                password='Hndrxx_1000',
                 host='localhost',
                 database='registrations'
             )
