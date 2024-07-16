@@ -1,7 +1,7 @@
 .header {
   background: url('https://images.unsplash.com/photo-1626125345510-4603468eedfb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
   background-size: cover;
-  height: 80vh; /* Adjust height as needed, using full viewport height */
+  height: 80%; /* Adjust height as needed, using full viewport height */
   color: white;
   text-align: center;
   display: flex;
@@ -35,7 +35,7 @@
 
 .top{
   margin-top: 8%;
-  padding-bottom: 0%;
+  padding-bottom: 5%;
   padding-top: 3%;
 }
 
