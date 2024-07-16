@@ -40,14 +40,14 @@ class Registrant:
                 cursor.execute(
                     """
                     CREATE TABLE IF NOT EXISTS Participants (
-                    ID SERIAL PRIMARY KEY,
-                    FirstName VARCHAR(50) NOT NULL,
-                    LastName VARCHAR(50) NOT NULL,
-                    Email VARCHAR(255) NOT NULL,
-                    PhoneNumber VARCHAR(20) NOT NULL,
-                    Registration_type VARCHAR(50) NOT NULL,
-                    SnackPreferences VARCHAR(255),
-                    ExtraServices BOOLEAN)
+                    id SERIAL PRIMARY KEY,
+                    firstname VARCHAR(50) NOT NULL,
+                    lastname VARCHAR(50) NOT NULL,
+                    email VARCHAR(255) NOT NULL,
+                    phonenumber VARCHAR(20) NOT NULL,
+                    registration_type VARCHAR(50) NOT NULL,
+                    snackpreferences VARCHAR(255),
+                    extraservices BOOLEAN)
                     """
                 )
                 conn.commit()
@@ -62,6 +62,8 @@ class Registrant:
                 conn.close()
 
     def register(self, email, phone):
+        self.email = email
+        self.phone = phone
         conn = self.connection_to_db()
         if conn:
             cursor = None
@@ -70,8 +72,8 @@ class Registrant:
 
                 cursor.execute(
                     """
-                    SELECT * FROM Participants WHERE Email = %s OR PhoneNumber = %s
-                    """, (email, phone)
+                    SELECT * FROM participants WHERE email = %s OR phonenumber = %s
+                    """, (self.email, self.phone)
                 )
                 user = cursor.fetchone()
                 return user
@@ -101,7 +103,7 @@ class Registrant:
 
                 cursor.execute(
                     """
-                    INSERT INTO Participants (FirstName, LastName, Email, PhoneNumber, Registration_type, SnackPreferences, ExtraServices)
+                    INSERT INTO participants (firstName, lastName, email, phonenumber, registration_type, snackpreferences, ExtraServices)
                     VALUES (%s, %s, %s, %s, %s, %s, %s)
                     """, (self.firstname, self.lastname, self.email, self.phone, self.registration_type, self.snacks,
                           self.extra_services)
