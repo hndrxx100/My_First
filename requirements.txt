@@ -27,3 +27,4 @@ ua-parser==0.18.0
 urllib3==2.2.1
 user-agents==2.2.0
 Werkzeug==3.0.1
+python-dotenv~=1.0.1

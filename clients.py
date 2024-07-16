@@ -1,5 +1,9 @@
 import mysql.connector
 from mysql.connector import errorcode
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 class Registrant:
@@ -15,10 +19,10 @@ class Registrant:
     def connection_to_db(self):
         try:
             conn = mysql.connector.connect(
-                user='hndrxx',  # Replace with your MySQL username
-                password='Hndrxx_1000',  # Replace with your MySQL password
-                host='localhost',  # Replace with your MySQL host
-                database='registrations'  # Replace with your MySQL database name
+                user=os.getenv('DB_USER'),
+                password=os.getenv('DB_PASSWORD'),
+                host=os.getenv('DB_HOST'),
+                database=os.getenv('DB_NAME')
             )
             return conn
         except mysql.connector.Error as err:
