@@ -37,12 +37,15 @@ def registration():
         new_person = Registrant(firstname, lastname, email, phone, registration_type, snack_preferences, extra_services)
         new_person.create_user_table()
 
-        if new_person.register(email, phone):
-            return jsonify({"status": "error", "message": "Sorry, Email or Phone Number Already Registered."})
-        else:
-            new_person.insert(firstname, lastname, email, phone, registration_type, snack_preferences,
-                              extra_services)
-            return jsonify({"status": "success", "message": "Congrats!!! You Have Registered, Hope To See You"})
+        try:
+            if new_person.register(email, phone):
+                return jsonify({"status": "error", "message": "Sorry, Email or Phone Number Already Registered."})
+            else:
+                new_person.insert(firstname, lastname, email, phone, registration_type, snack_preferences,
+                                  extra_services)
+                return jsonify({"status": "success", "message": "Congrats!!! You Have Registered, Hope To See You"})
+        except Exception as e:
+            return jsonify({"status": "error", "message": "An error occurred. Please try again."})
     return render_template('registration.html')
 
 
