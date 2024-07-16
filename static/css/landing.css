@@ -108,6 +108,12 @@
   height: auto; /* Ensures images maintain aspect ratio */
 }
 
+.testimonials-section {
+  height: 500px; /* Set your desired height */
+  overflow: hidden; /* Hide any overflow content */
+  margin-bottom: -10%;
+}
+
 .speakers-card{
   border: none; /* Adjust maximum width of the images */
   height: auto; /* Ensures images maintain aspect ratio */ 
