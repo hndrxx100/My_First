@@ -87,28 +87,16 @@ class Registrant:
                     cursor.close()
                 conn.close()
 
-    def insert(self, firstname, lastname, email, phone, registration_type, snacks, extra_services):
-
-        self.firstname = firstname
-        self.lastname = lastname
-        self.email = email
-        self.phone = phone
-        self.registration_type = registration_type
-        self.snacks = snacks
-        self.extra_services = extra_services
+    def insert_data(self, firstname, lastname, email, phone, registration_type, snacks, extra_services):
         conn = self.connection_to_db()
         if conn:
             cursor = None
             try:
                 cursor = conn.cursor()
+                query = "INSERT INTO participants (firstname, lastname, email, phonenumber, registration_type, " \
+                        "snackpreferences, extraservices) VALUES (%s, %s, %s, %s, %s, %s, %s)"
 
-                cursor.execute(
-                    """
-                    INSERT INTO participants (firstname, lastname, email, phonenumber, registration_type, snackpreferences, extraservices)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)
-                    """, (self.firstname, self.lastname, self.email, self.phone, self.registration_type, self.snacks,
-                          self.extra_services)
-                )
+                cursor.execute(query, (firstname, lastname, email, phone, registration_type, snacks, extra_services))
                 conn.commit()
                 print("Participant inserted successfully")
 
