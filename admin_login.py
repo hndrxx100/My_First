@@ -60,16 +60,16 @@ class AdminLogin:
                 cursor = conn.cursor()
                 if registration_type == 'All':
                     cursor.execute(
-                        'SELECT firstname, lastname, email, phonenumber, registration_type, '
-                        'snackpreferences, extraservices FROM participants'
+                        'SELECT Firstname, Lastname, Email, Phonenumber, Registration_type, '
+                        'Snackpreferences, Extraservices FROM Participants'
                     )
                     columns = [column[0] for column in cursor.description]
                     registrations = [dict(zip(columns, row)) for row in cursor.fetchall()]
                     return registrations
                 else:
                     cursor.execute(
-                        'SELECT firstname, lastname, email, phonenumber, registration_type, '
-                        'snackpreferences, extraservices FROM participants WHERE registration_type = %s',
+                        'SELECT Firstname, Lastname, Email, Phonenumber, Registration_type, '
+                        'Snackpreferences, Extraservices FROM Participants WHERE Registration_type = %s',
                         (registration_type,)
                     )
                     columns = [column[0] for column in cursor.description]

@@ -40,14 +40,14 @@ class Registrant:
                 cursor.execute(
                     """
                     CREATE TABLE IF NOT EXISTS Participants (
-                    id SERIAL PRIMARY KEY,
-                    firstname VARCHAR(50) NOT NULL,
-                    lastname VARCHAR(50) NOT NULL,
-                    email VARCHAR(255) NOT NULL,
-                    phonenumber VARCHAR(20) NOT NULL,
-                    registration_type VARCHAR(50) NOT NULL,
-                    snackpreferences VARCHAR(255),
-                    extraservices BOOLEAN)
+                    Id SERIAL PRIMARY KEY,
+                    Firstname VARCHAR(50) NOT NULL,
+                    Lastname VARCHAR(50) NOT NULL,
+                    Email VARCHAR(255) NOT NULL,
+                    Phonenumber VARCHAR(20) NOT NULL,
+                    Registration_type VARCHAR(50) NOT NULL,
+                    Snackpreferences VARCHAR(255),
+                    Extraservices BOOLEAN)
                     """
                 )
                 conn.commit()
@@ -72,7 +72,7 @@ class Registrant:
 
                 cursor.execute(
                     """
-                    SELECT * FROM participants WHERE email = %s OR phonenumber = %s
+                    SELECT * FROM Participants WHERE Email = %s OR Phonenumber = %s
                     """, (self.email, self.phone)
                 )
                 user = cursor.fetchone()
@@ -101,25 +101,18 @@ class Registrant:
             try:
                 cursor = conn.cursor()
 
-                query = sql.SQL("""
-                    INSERT INTO Participants (firstname, lastname, email, phonenumber, registration_type, snackpreferences, extraservices)
-                    VALUES ({firstname}, {lastname}, {email}, {phonenumber}, {registration_type}, {snackpreferences}, {extraservices})
-                """).format(
-                    firstname=sql.Literal(self.firstname),
-                    lastname=sql.Literal(self.lastname),
-                    email=sql.Literal(self.email),
-                    phonenumber=sql.Literal(self.phone),
-                    registration_type=sql.Literal(self.registration_type),
-                    snackpreferences=sql.Literal(self.snacks),
-                    extraservices=sql.Literal(self.extra_services)
+                cursor.execute(
+                    """
+                    INSERT INTO Participants (Firstname, Lastname, Email, Phonenumber, Registration_type, Snackpreferences, Extraservices)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                    """, (self.firstname, self.lastname, self.email, self.phone, self.registration_type, self.snacks,
+                          self.extra_services)
                 )
-
-                cursor.execute(query)
                 conn.commit()
                 print("Participant inserted successfully")
 
             except psycopg2.Error as err:
-                print(f"Error inserting user: {err.pgcode}, {err.pgerror}")
+                print(f"Error inserting user: {err}")
 
             finally:
                 if cursor:

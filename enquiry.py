@@ -2,6 +2,7 @@ import psycopg2
 from psycopg2 import sql, errors
 from admin_login import AdminLogin
 
+
 def create_table():
     conn = AdminLogin.connection_to_db()
     if conn:
@@ -29,6 +30,7 @@ def create_table():
                 cursor.close()
             conn.close()
     return []
+
 
 def insert_enquiry_data(full_name, email, message):
     create_table()
