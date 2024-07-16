@@ -51,7 +51,7 @@ class Registrant:
                     """
                 )
                 conn.commit()
-                print("Users table created successfully")
+                print("Participants table created successfully")
 
             except psycopg2.Error as err:
                 print(f"Error creating table: {err}")
@@ -86,6 +86,13 @@ class Registrant:
                 conn.close()
 
     def insert(self, firstname, lastname, email, phone, registration_type, snacks, extra_services):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.email = email
+        self.phone = phone
+        self.registration_type = registration_type
+        self.snacks = snacks
+        self.extra_services = extra_services
         conn = self.connection_to_db()
         if conn:
             cursor = None
@@ -96,10 +103,11 @@ class Registrant:
                     """
                     INSERT INTO Participants (FirstName, LastName, Email, PhoneNumber, Registration_type, SnackPreferences, ExtraServices)
                     VALUES (%s, %s, %s, %s, %s, %s, %s)
-                    """, (firstname, lastname, email, phone, registration_type, snacks, extra_services)
+                    """, (self.firstname, self.lastname, self.email, self.phone, self.registration_type, self.snacks,
+                          self.extra_services)
                 )
                 conn.commit()
-                print("User inserted successfully")
+                print("Participant inserted successfully")
 
             except psycopg2.Error as err:
                 print(f"Error inserting user: {err}")
