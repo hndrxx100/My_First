@@ -16,8 +16,8 @@ def landing():
 
         try:
             insert_enquiry_data(fullname, email, message)
-            return jsonify({"status": "success", "message": "Thank You For Reaching Out, We Will Get Back To You "
-                                                            "Shortly"})
+            return jsonify(
+                {"status": "success", "message": "Thank You For Reaching Out, We Will Get Back To You Shortly"})
         except Exception as e:
             return jsonify({"status": "error", "message": "An error occurred. Please try again."})
     return render_template('landing.html')

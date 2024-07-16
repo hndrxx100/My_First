@@ -1,5 +1,5 @@
-import mysql.connector
-from mysql.connector import errorcode
+import psycopg2
+from psycopg2 import sql, errors
 from dotenv import load_dotenv
 import os
 
@@ -14,20 +14,16 @@ class AdminLogin:
     @staticmethod
     def connection_to_db():
         try:
-            conn = mysql.connector.connect(
+            conn = psycopg2.connect(
                 user=os.getenv('DB_USER'),
                 password=os.getenv('DB_PASSWORD'),
                 host=os.getenv('DB_HOST'),
-                database=os.getenv('DB_NAME')
+                dbname=os.getenv('DB_NAME'),
+                port=os.getenv('DB_PORT')
             )
             return conn
-        except mysql.connector.Error as err:
-            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-                print("Something is wrong with your user name or password")
-            elif err.errno == errorcode.ER_BAD_DB_ERROR:
-                print("Database does not exist")
-            else:
-                print(err)
+        except psycopg2.Error as err:
+            print(f"Database connection error: {err}")
             return None
 
     def authentication(self, username=None, password=None):
@@ -46,7 +42,7 @@ class AdminLogin:
                 login_user = cursor.fetchone()
                 return login_user
 
-            except mysql.connector.Error as err:
+            except psycopg2.Error as err:
                 print(f"Error signing in: {err}")
                 return False
 
@@ -63,20 +59,24 @@ class AdminLogin:
             try:
                 cursor = conn.cursor()
                 if registration_type == 'All':
-                    cursor.execute('SELECT FirstName, LastName, Email, PhoneNumber, Registration_type, '
-                                   'SnackPreferences, ExtraServices FROM participants')
+                    cursor.execute(
+                        'SELECT FirstName, LastName, Email, PhoneNumber, Registration_type, '
+                        'SnackPreferences, ExtraServices FROM participants'
+                    )
                     columns = [column[0] for column in cursor.description]
                     registrations = [dict(zip(columns, row)) for row in cursor.fetchall()]
                     return registrations
                 else:
-                    cursor.execute('SELECT FirstName, LastName, Email, PhoneNumber, Registration_type, '
-                                   'SnackPreferences, ExtraServices FROM participants WHERE Registration_type = %s',
-                                   (registration_type,))
+                    cursor.execute(
+                        'SELECT FirstName, LastName, Email, PhoneNumber, Registration_type, '
+                        'SnackPreferences, ExtraServices FROM participants WHERE Registration_type = %s',
+                        (registration_type,)
+                    )
                     columns = [column[0] for column in cursor.description]
                     registrations = [dict(zip(columns, row)) for row in cursor.fetchall()]
                     return registrations
 
-            except mysql.connector.Error as err:
+            except psycopg2.Error as err:
                 print(f"Error fetching data: {err}")
                 return []
 

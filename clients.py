@@ -1,5 +1,5 @@
-import mysql.connector
-from mysql.connector import errorcode
+import psycopg2
+from psycopg2 import sql, errors
 from dotenv import load_dotenv
 import os
 
@@ -18,20 +18,16 @@ class Registrant:
 
     def connection_to_db(self):
         try:
-            conn = mysql.connector.connect(
+            conn = psycopg2.connect(
                 user=os.getenv('DB_USER'),
                 password=os.getenv('DB_PASSWORD'),
                 host=os.getenv('DB_HOST'),
-                database=os.getenv('DB_NAME')
+                dbname=os.getenv('DB_NAME'),
+                port=os.getenv('DB_PORT')
             )
             return conn
-        except mysql.connector.Error as err:
-            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-                print("Something is wrong with your user name or password")
-            elif err.errno == errorcode.ER_BAD_DB_ERROR:
-                print("Database does not exist")
-            else:
-                print(err)
+        except psycopg2.Error as err:
+            print(f"Database connection error: {err}")
             return None
 
     def create_user_table(self):
@@ -41,23 +37,23 @@ class Registrant:
             try:
                 cursor = conn.cursor()
 
-                # Corrected SQL for table creation
                 cursor.execute(
                     """
                     CREATE TABLE IF NOT EXISTS Participants (
-                    ID INT AUTO_INCREMENT PRIMARY KEY,
+                    ID SERIAL PRIMARY KEY,
                     FirstName VARCHAR(50) NOT NULL,
                     LastName VARCHAR(50) NOT NULL,
                     Email VARCHAR(255) NOT NULL,
                     PhoneNumber VARCHAR(20) NOT NULL,
                     Registration_type VARCHAR(50) NOT NULL,
                     SnackPreferences VARCHAR(255),
-                    ExtraServices TINYINT(1))
+                    ExtraServices BOOLEAN)
                     """
                 )
+                conn.commit()
                 print("Users table created successfully")
 
-            except mysql.connector.Error as err:
+            except psycopg2.Error as err:
                 print(f"Error creating table: {err}")
 
             finally:
@@ -72,7 +68,6 @@ class Registrant:
             try:
                 cursor = conn.cursor()
 
-                # Check if the username or email already exists
                 cursor.execute(
                     """
                     SELECT * FROM Participants WHERE Email = %s OR PhoneNumber = %s
@@ -81,7 +76,7 @@ class Registrant:
                 user = cursor.fetchone()
                 return user
 
-            except mysql.connector.Error as err:
+            except psycopg2.Error as err:
                 print(f"Error signing up: {err}")
                 return None
 
@@ -97,17 +92,16 @@ class Registrant:
             try:
                 cursor = conn.cursor()
 
-                # Insert the data into the table
                 cursor.execute(
                     """
-                    INSERT INTO Participants (Firstname, Lastname, Email, PhoneNumber, Registration_type, SnackPreferences, ExtraServices)
+                    INSERT INTO Participants (FirstName, LastName, Email, PhoneNumber, Registration_type, SnackPreferences, ExtraServices)
                     VALUES (%s, %s, %s, %s, %s, %s, %s)
                     """, (firstname, lastname, email, phone, registration_type, snacks, extra_services)
                 )
                 conn.commit()
                 print("User inserted successfully")
 
-            except mysql.connector.Error as err:
+            except psycopg2.Error as err:
                 print(f"Error inserting user: {err}")
 
             finally:
