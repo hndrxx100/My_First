@@ -1,0 +1,20 @@
+Dear [firstname] [lastname]
+
+Thank you for registering for Speech Conference 2024. We are delighted to have you join us.
+
+Event Details:
+- Date: 17th August, 2024
+- Time: 9AM
+- Location: New Auditorium
+
+Registration Details:
+- Registration Type: [user_registration]
+- Snack Preferences: [snack_preference]
+- Extra Services: [extraservice]
+
+If you have any questions or need further assistance, please do not hesitate to contact us at speechconference@gmail.com.
+
+We look forward to seeing you at the event!
+
+Best regards,
+Speech Conference 2024.

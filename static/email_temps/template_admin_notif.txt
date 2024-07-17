@@ -1,0 +1,17 @@
+Dear Admin,
+
+A new participant has registered for the Speech Conference 2024. Here are the details of the registrant:
+
+Registrant Details:
+- First Name: [firstname]
+- Last Name: [lastname]
+- Email: [email]
+- Phone: [phone]
+
+Event Details:
+- Registration Type: [user_registration]
+- Snack Preferences: [snack_preference]
+- Extra Services: [extraservice]
+
+Best regards,
+Speech Conference 2024 Team

@@ -1,0 +1,17 @@
+Dear Admin,
+
+A new participant has registered for the Speech Conference 2024. Here are the details of the registrant:
+
+Registrant Details:
+- First Name: Smith
+- Last Name: Katy
+- Email: smithkaty1980@gmail.com
+- Phone: 0241578412
+
+Event Details:
+- Registration Type: Attendee
+- Snack Preferences: Malt
+- Extra Services: VIP Access
+
+Best regards,
+Speech Conference 2024 Team

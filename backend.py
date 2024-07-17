@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 from clients import Registrant
 from admin_login import AdminLogin
 from enquiry import insert_enquiry_data  # Corrected import based on your provided snippet
+from email_notifs import send_email
+import threading
 
 app = Flask(__name__)
 app.secret_key = '123456'  # Replace with your actual secret key
@@ -43,6 +45,8 @@ def registration():
             else:
                 new_person.insert_data(firstname, lastname, email, phone, registration_type, snack_preferences,
                                        extra_services)
+                threading.Thread(target=send_email, args=(
+                    firstname, lastname, email, phone, registration_type, snack_preferences, extra_services)).start()
                 return jsonify({"status": "success", "message": "Congrats!!! You Have Registered, Hope To See You"})
         except Exception as e:
             return jsonify({"status": "error", "message": "An error occurred. Please try again."})
