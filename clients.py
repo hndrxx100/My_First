@@ -88,21 +88,29 @@ class Registrant:
                 conn.close()
 
     def insert_data(self, firstname, lastname, email, phone, registration_type, snacks, extra_services):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.email = email
+        self.phone = phone
+        self.registration_type = registration_type
+        self.snacks = snacks
+        self.extra_services = extra_services
         conn = self.connection_to_db()
         if conn:
             cursor = None
             try:
                 cursor = conn.cursor()
-                query = "INSERT INTO participants (firstname, lastname, email, phonenumber, registration_type, " \
-                        "snackpreferences, extraservices) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-
-                cursor.execute(query, (firstname, lastname, email, phone, registration_type, snacks, extra_services))
+                # Insert the data into the table
+                cursor.execute(
+                    """
+                    INSERT INTO Participants (Firstname, Lastname, Email, PhoneNumber, Registration_type, SnackPreferences, ExtraServices)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                    """, (self.firstname, self.lastname, self.email, self.phone, self.registration_type, self.snacks, self.extra_services)
+                )
                 conn.commit()
                 print("Participant inserted successfully")
-
             except psycopg2.Error as err:
                 print(f"Error inserting user: {err}")
-
             finally:
                 if cursor:
                     cursor.close()
