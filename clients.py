@@ -47,7 +47,7 @@ class Registrant:
                     Phonenumber VARCHAR(20) NOT NULL,
                     Registration_type VARCHAR(50) NOT NULL,
                     Snackpreferences VARCHAR(255),
-                    Extraservices BOOLEAN)
+                    Extraservices VARCHAR(3))
                     """
                 )
                 conn.commit()

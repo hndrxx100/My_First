@@ -32,7 +32,7 @@ def registration():
         phone = request.form['phone']
         registration_type = request.form['registration_type']
         snack_preferences = ', '.join(request.form.getlist('snack_preferences'))
-        extra_services = 1 if 'Extra Services' in request.form.getlist('extra_services') else 0
+        extra_services = 'Yes' if 'Extra Services' in request.form.getlist('extra_services') else 'No'
 
         new_person = Registrant(firstname, lastname, email, phone, registration_type, snack_preferences, extra_services)
         new_person.create_user_table()
