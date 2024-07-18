@@ -4,9 +4,13 @@ from admin_login import AdminLogin
 from enquiry import insert_enquiry_data  # Corrected import based on your provided snippet
 from email_notifs import send_email
 import threading
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = '123456'  # Replace with your actual secret key
+app.secret_key = os.getenv('APP_SECRET_KEY')  # Replace with your actual secret key
 
 
 @app.route('/', methods=['GET', 'POST'])

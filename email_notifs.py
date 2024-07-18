@@ -6,7 +6,7 @@ from letter_work_around import registrant_letter, admin_letter
 from dotenv import load_dotenv
 import os
 
-load_dotenv('database.env')
+load_dotenv()
 
 
 def send_email(firstname, lastname, recipient_email, phone, registration_type, snack_preferences, extra_services):
